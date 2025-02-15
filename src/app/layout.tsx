@@ -15,40 +15,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const toggleTheme = (): void => {
-    if (theme === "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
+  const toggleTheme = () => {
+    setIsDarkTheme((prevTheme) => !prevTheme);
   };
 
   useEffect(() => {
-    if (theme === "light") {
-      document.documentElement.removeAttribute("data-theme");
+    if (isDarkTheme) {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.classList.remove("dark");
     }
-  }, [theme]);
+  }, [isDarkTheme]);
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-background text-foreground min-h-screen flex flex-col">
-          <header className="bg-primary text-primary-foreground">
+          <header className="bg-transparent text-foreground">
             <nav className="container mx-auto px-4 py-4">
               <ul className="flex flex-wrap justify-between items-center">
                 <li className="text-2xl font-bold hover:text-secondary transition-colors cursor-pointer">
-                  WordMaster
+                  <Link href="/">WordMaster</Link>
                 </li>
                 <li className="flex space-x-6">
                   <span
                     onClick={toggleTheme}
                     className="cursor-pointer hover:text-secondary transition-colors"
                   >
-                    Поменять тему
+                    {isDarkTheme ? "Темная тема" : "Светлая тема"}
                   </span>
                   <Link
                     href="/words"
