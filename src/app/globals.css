@@ -2,40 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
-  :root {
-    --background: 210 40% 98%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-  }
-
-  [data-theme="dark"] {
-    --background: 222.2 84% 4.9%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-  }
-} */
-
 @layer base {
   :root {
-    /* Светлая тема - Мягкие пастельные тона */
-    --background: 0 0% 100%; /* Белый фон (Lightness 100%) */
-    --primary: 200 80% 70%; /* Мягкий пастельный синий */
-    --primary-foreground: 0 0% 0%; /* Черный текст (Lightness 0%) */
-    --secondary: 340 50% 70%; /* Мягкий пастельный коралловый */
-    --secondary-foreground: 0 0% 0%; /* Черный текст на коралловом фоне */
+    /* Светлая тема */
+    --background: 240 2% 38%; /* #5D5C61 */
+    --foreground: 240 2% 20%; /* #5D5C61 (немного затемнен) */
+
+    --primary: 162 45% 40%; /* #379683 */
+    --primary-foreground: 0 0% 100%; /* Белый */
+
+    --secondary: 203 30% 60%; /* #7395AE */
+    --secondary-foreground: 240 2% 20%; /* #5D5C61 (немного затемнен) */
+
+    --muted: 30 20% 65%; /* #B1A296 */
+    --muted-foreground: 240 2% 40%; /* #5D5C61 (средняя светлость) */
+
+    --accent: 203 30% 50%; /* #557A95 */
+    --accent-foreground: 240 2% 20%; /* #5D5C61 (немного затемнен) */
+
+    --destructive: 0 60% 50%; /* Красный */
+    --destructive-foreground: 0 0% 100%; /* Белый */
+
+    --border: 240 2% 80%; /* #5D5C61 (немного осветлен) */
+    --input: 240 2% 80%; /* #5D5C61 (немного осветлен) */
+    --ring: 162 45% 40%; /* #379683 */
+
+    --radius: 0.5rem; /* Радиус */
   }
 
   [data-theme="dark"] {
-    /* Темная тема - Приглушенные тона */
-    --background: 0 0% 10%; /* Темный фон (Lightness 10%) */
-    --primary: 210 50% 50%; /* Приглушенный синий */
-    --primary-foreground: 0 0% 100%; /* Белый текст (Lightness 100%) */
-    --secondary: 270 40% 50%; /* Приглушенный фиолетово-синий */
-    --secondary-foreground: 0 0% 100%; /* Белый текст на фиолетово-синем фоне */
+    /* Темная тема */
+    --background: 180 5% 19%; /* #2C3531 */
+    --foreground: 180 40% 88%; /* #D1E8E2 */
+
+    --primary: 180 60% 35%; /* #116466 */
+    --primary-foreground: 180 40% 88%; /* #D1E8E2 */
+
+    --secondary: 30 40% 70%; /* #D9B08C */
+    --secondary-foreground: 180 5% 19%; /* #2C3531 */
+
+    --muted: 180 40% 88%; /* #D1E8E2 */
+    --muted-foreground: 180 40% 70%; /* #D1E8E2 (немного изменен) */
+
+    --accent: 30 50% 75%; /* #FFCB9A */
+    --accent-foreground: 180 5% 19%; /* #2C3531 */
+
+    --destructive: 0 60% 40%; /* Красный */
+    --destructive-foreground: 180 40% 88%; /* #D1E8E2 */
+
+    --border: 180 10% 25%; /* #2C3531 (немного изменен) */
+    --input: 180 10% 25%; /* #2C3531 (немного изменен) */
+    --ring: 180 60% 35%; /* #116466 */
+
+    --radius: 0.5rem; /* Радиус */
   }
 }
