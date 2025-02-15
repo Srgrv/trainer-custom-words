@@ -3,33 +3,23 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useWords } from "@/context/WordsContexts";
 
-type Word = {
-  id: number;
-  english: string;
-  russian: string;
-  learned: boolean;
-};
-
-type WordInputProps = {
-  onAddWord: (word: Word) => void;
-};
-
-function WordInput({ onAddWord }: WordInputProps) {
+function WordInput() {
   const [english, setEnglish] = useState("");
   const [russian, setRussian] = useState("");
   const { toast } = useToast();
+  const { addWord } = useWords();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (english.trim() && russian.trim()) {
-      const newWord: Word = {
-        id: Date.now(),
+      addWord({
         english: english.trim(),
         russian: russian.trim(),
         learned: false,
-      };
-      onAddWord(newWord);
+      });
+
       setEnglish("");
       setRussian("");
       toast({
@@ -40,7 +30,7 @@ function WordInput({ onAddWord }: WordInputProps) {
   };
 
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <div>
         <Label htmlFor="english">Английское слово</Label>
         <Input

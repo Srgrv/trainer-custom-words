@@ -3,7 +3,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import WordInput from "@/components/WordInput";
 import WordTable from "@/components/WordTable";
-import React, { useState } from "react";
+import React from "react";
+import { useAuth } from "@/components/AuthContext";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type Word = {
   id: number;
@@ -13,21 +16,38 @@ type Word = {
 };
 
 function WordsPage() {
-  const [words, setWords] = useState<Word[]>([]);
+  const { user } = useAuth();
 
-  const handleAddWord = (newWord: Word) => {
-    setWords([...words, newWord]);
-  };
+  // const { words } = useWords();
+  // const [words, setWords] = useState<Word[]>([]);
 
-  const handleUpdateWord = (updatedWord: Word) => {
-    setWords(
-      words.map((word) => (word.id === updatedWord.id ? updatedWord : word))
+  // const handleAddWord = (newWord: Word) => {
+  //   setWords([...words, newWord]);
+  // };
+
+  // const handleUpdateWord = (updatedWord: Word) => {
+  //   setWords(
+  //     words.map((word) => (word.id === updatedWord.id ? updatedWord : word))
+  //   );
+  // };
+
+  // const handleDeleteWord = (id: number) => {
+  //   setWords(words.filter((word) => word.id !== id));
+  // };
+
+  if (!user) {
+    return (
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">Доступ запрещен</h1>
+        <p className="mb-4">
+          Пожалуйста, войдите в систему, чтобы получить доступ к этой странице.
+        </p>
+        <Link href="/login">
+          <Button>Войти</Button>
+        </Link>
+      </div>
     );
-  };
-
-  const handleDeleteWord = (id: number) => {
-    setWords(words.filter((word) => word.id !== id));
-  };
+  }
 
   return (
     <div className="space-y-8">
@@ -38,7 +58,7 @@ function WordsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <WordInput onAddWord={handleAddWord} />
+          <WordInput />
         </CardContent>
       </Card>
       <Card>
@@ -48,11 +68,7 @@ function WordsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <WordTable
-            words={words}
-            onUpdateWord={handleUpdateWord}
-            onDeleteWord={handleDeleteWord}
-          />
+          <WordTable />
         </CardContent>
       </Card>
     </div>

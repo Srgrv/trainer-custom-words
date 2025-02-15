@@ -17,22 +17,25 @@ import {
 } from "./ui/table";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useWords } from "@/context/WordsContexts";
 
-type Word = {
-  id: number;
-  english: string;
-  russian: string;
-  learned: boolean;
-};
+// type Word = {
+//   id: number;
+//   english: string;
+//   russian: string;
+//   learned: boolean;
+// };
 
-type WordTableProps = {
-  words: Word[];
-  onUpdateWord: (updatedWord: Word) => void;
-  onDeleteWord: (id: number) => void;
-};
+// type WordTableProps = {
+//   words: Word[];
+//   onUpdateWord: (updatedWord: Word) => void;
+//   onDeleteWord: (id: number) => void;
+// };
 
-function WordTable({ words, onUpdateWord, onDeleteWord }: WordTableProps) {
-  const [filter, setFilter] = useState<"all" | "learned" | "unlearned">("all");
+function WordTable() {
+  const [filter, setFilter] = useState("all");
+
+  const { words, updateWord, deleteWord } = useWords();
 
   const filteredWords = words.filter((word) => {
     if (filter === "learned") return word.learned;
@@ -47,20 +50,20 @@ function WordTable({ words, onUpdateWord, onDeleteWord }: WordTableProps) {
   ) => {
     const wordToUpdate = words.find((word) => word.id === id);
     if (wordToUpdate) {
-      onUpdateWord({ ...wordToUpdate, [field]: value });
+      updateWord({ ...wordToUpdate, [field]: value });
     }
   };
 
   const handleToggleLearned = (id: number) => {
     const wordToUpdate = words.find((word) => word.id === id);
     if (wordToUpdate) {
-      onUpdateWord({ ...wordToUpdate, learned: !wordToUpdate.learned });
+      updateWord({ ...wordToUpdate, learned: !wordToUpdate.learned });
     }
   };
 
   return (
     <div className="space-y-4">
-      <Select>
+      <Select onValueChange={setFilter} defaultValue={filter}>
         <SelectTrigger>
           <SelectValue placeholder="Фильтр" />
         </SelectTrigger>
@@ -97,9 +100,6 @@ function WordTable({ words, onUpdateWord, onDeleteWord }: WordTableProps) {
                     onChange={(e) =>
                       handleEdit(word.id, "russian", e.target.value)
                     }
-                    // onChange={(e) =>
-                    //   handleEdit(word.id, "russian", e.target.value)
-                    // }
                   />
                 </TableCell>
                 <TableCell>
@@ -113,7 +113,7 @@ function WordTable({ words, onUpdateWord, onDeleteWord }: WordTableProps) {
                 <TableCell className="text-right">
                   <Button
                     variant="destructive"
-                    onClick={() => onDeleteWord(word.id)}
+                    onClick={() => deleteWord(word.id)}
                   >
                     Удалить
                   </Button>

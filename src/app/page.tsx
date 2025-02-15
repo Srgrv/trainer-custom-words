@@ -56,7 +56,11 @@ export default function Home() {
           </Button>
         </Link>
         <Link href="/login">
-          <Button size="lg" variant="outline" className="w-full">
+          <Button
+            size="lg"
+            variant="outline"
+            className="w-full text-secondary-foreground"
+          >
             Войти
           </Button>
         </Link>
