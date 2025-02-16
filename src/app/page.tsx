@@ -1,12 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import type { Metadata } from "next";
-import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "WordMaster - Тренажер английских слов",
-  description: "Изучайте английские слова эффективно и весело",
-};
+import Link from "next/link";
 
 export default function Home() {
   return (

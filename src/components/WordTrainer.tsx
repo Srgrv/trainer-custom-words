@@ -42,7 +42,7 @@ function WordTrainer() {
       updateWord({ ...currentWord, learned: true });
 
       const unlearned = words.filter(
-        (word) => !word.learned && word.id !== currentWord.id
+        (word) => !word.learned && word._id !== currentWord._id
       );
       if (unlearned.length > 0) {
         setCurrentWord(unlearned[Math.floor(Math.random() * unlearned.length)]);
