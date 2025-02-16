@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import WordInput from "@/components/WordInput";
 import WordTable from "@/components/WordTable";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useWords } from "@/context/WordsContexts";
 

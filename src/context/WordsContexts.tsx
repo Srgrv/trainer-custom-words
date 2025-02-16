@@ -34,12 +34,7 @@ export const WordsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [words, setWords] = useState<Word[]>([]);
-  const { data: session, status } = useSession();
-
-  // useEffect(() => {
-  //   console.log(status);
-  //   if (status === "authenticated") fetchWords();
-  // }, [status]);
+  const { data: session } = useSession();
 
   const fetchWords = useCallback(async () => {
     if (!session) return;

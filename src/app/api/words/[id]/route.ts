@@ -72,7 +72,7 @@ export async function DELETE(
     return NextResponse.json({ message: "Word deleted successfully" });
   } catch (error) {
     return NextResponse.json(
-      { message: "Error deleting word" },
+      { message: "Error deleting word", error },
       { status: 500 }
     );
   }
