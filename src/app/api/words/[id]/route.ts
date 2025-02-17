@@ -6,16 +6,11 @@ import { getServerSession } from "next-auth/next";
 import dbConnect from "@/mongodb/mongodb";
 import Word from "@/mongodb/models/Word";
 
-type ParamsType = {
-  params: {
-    id: string;
-  };
-};
-
 export async function PUT(
   req: NextRequest,
-  { params }: { params: ParamsType }
+  context: { params: { id: string } }
 ) {
+  const { params } = context;
   try {
     const session = await getServerSession(authOptions);
 
@@ -48,7 +43,7 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: ParamsType }
+  { params }: { params: { id: string } }
 ) {
   console.log("delete работает");
   try {
