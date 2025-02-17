@@ -8,7 +8,7 @@ import Word from "@/mongodb/models/Word";
 
 export async function PUT(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -18,9 +18,8 @@ export async function PUT(
     }
 
     await dbConnect();
-    const { id } = await context.params;
+    const id = (await params).id;
 
-    console.log(id);
     const body = await req.json();
 
     const updatedWord = await Word.findOneAndUpdate(
@@ -44,7 +43,7 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   console.log("delete работает");
   try {
@@ -58,11 +57,11 @@ export async function DELETE(
     console.log("после проверки");
 
     await dbConnect();
-
-    console.log("Удаляем слово с id:", params.id);
+    const id = (await params).id;
+    console.log("Удаляем слово с id:", id);
 
     const deletedWord = await Word.findOneAndDelete({
-      _id: new ObjectId(params.id),
+      _id: new ObjectId(id),
       userId: session.user.id,
     }).exec();
 
