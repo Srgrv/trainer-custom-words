@@ -10,7 +10,6 @@ export async function PUT(
   req: NextRequest,
   context: { params: { id: string } }
 ) {
-  const { params } = context;
   try {
     const session = await getServerSession(authOptions);
 
@@ -19,11 +18,13 @@ export async function PUT(
     }
 
     await dbConnect();
+    const { id } = await context.params;
 
+    console.log(id);
     const body = await req.json();
 
     const updatedWord = await Word.findOneAndUpdate(
-      { _id: new ObjectId(params.id), userId: session.user.id },
+      { _id: new ObjectId(id), userId: session.user.id },
       body,
       { new: true }
     );
