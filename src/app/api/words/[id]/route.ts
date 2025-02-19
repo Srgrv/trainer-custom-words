@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { ObjectId } from "mongodb";
 
 import { authOptions } from "@/lib/auth";
@@ -7,7 +7,7 @@ import dbConnect from "@/mongodb/mongodb";
 import Word from "@/mongodb/models/Word";
 
 export async function PUT(
-  req: Request,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -41,7 +41,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  req: Request,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   console.log("delete работает");
@@ -56,9 +56,7 @@ export async function DELETE(
     console.log("после проверки");
 
     await dbConnect();
-
     const id = (await params).id;
-
     console.log("Удаляем слово с id:", id);
 
     const deletedWord = await Word.findOneAndDelete({
