@@ -6,7 +6,7 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useWords } from "@/context/WordsContexts";
+import { useGlobal } from "@/context/GlobalContext";
 import { useToast } from "@/hooks/use-toast";
 
 // type Word = {
@@ -22,7 +22,7 @@ function WordTrainer() {
     null
   );
   const [userInput, setUserInput] = useState("");
-  const { words, updateWord, resetProgress } = useWords();
+  const { words, updateWord, resetProgress } = useGlobal();
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -3,13 +3,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import WordInput from "@/components/WordInput";
 import WordTable from "@/components/WordTable";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useWords } from "@/context/WordsContexts";
+import { useGlobal } from "@/context/GlobalContext";
 
 export default function WordsPage() {
   const { data: session } = useSession();
-  const { words, fetchWords } = useWords();
+  const { words, fetchWords } = useGlobal();
 
   useEffect(() => {
     if (session && words.length === 0) {
@@ -19,9 +19,9 @@ export default function WordsPage() {
 
   return (
     <div className="space-y-8">
-      <Card className="bg-white shadow-lg">
+      <Card className="bg-red-400 shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-blue-600">
+          <CardTitle className="text-2xl font-bold text-blue-600 ">
             Добавить новое слово
           </CardTitle>
         </CardHeader>
