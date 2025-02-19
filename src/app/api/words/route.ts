@@ -1,7 +1,5 @@
-// import type { NextApiRequest, NextApiResponse } from "next";
-
 import { NextResponse } from "next/server";
-// import { getSession } from "next-auth/react";
+
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth/next";
 
@@ -22,7 +20,7 @@ export async function GET() {
     return NextResponse.json(words);
   } catch (error) {
     return NextResponse.json(
-      { message: "Error fetching words" },
+      { message: "Error fetching words", error },
       { status: 500 }
     );
   }
@@ -49,7 +47,7 @@ export async function POST(req: Request) {
     return NextResponse.json(word, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      { message: "Error creating word" },
+      { message: "Error creating word", error },
       { status: 500 }
     );
   }

@@ -8,7 +8,7 @@ import Word from "@/mongodb/models/Word";
 
 export async function PUT(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -18,11 +18,11 @@ export async function PUT(
     }
 
     await dbConnect();
-
+    const id = (await params).id;
     const body = await req.json();
 
     const updatedWord = await Word.findOneAndUpdate(
-      { _id: new ObjectId(params.id), userId: session.user.id },
+      { _id: new ObjectId(id), userId: session.user.id },
       body,
       { new: true }
     );
@@ -42,7 +42,7 @@ export async function PUT(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   console.log("delete работает");
   try {
@@ -57,10 +57,12 @@ export async function DELETE(
 
     await dbConnect();
 
-    console.log("Удаляем слово с id:", params.id);
+    const id = (await params).id;
+
+    console.log("Удаляем слово с id:", id);
 
     const deletedWord = await Word.findOneAndDelete({
-      _id: new ObjectId(params.id),
+      _id: new ObjectId(id),
       userId: session.user.id,
     }).exec();
 
@@ -72,7 +74,7 @@ export async function DELETE(
     return NextResponse.json({ message: "Word deleted successfully" });
   } catch (error) {
     return NextResponse.json(
-      { message: "Error deleting word" },
+      { message: "Error deleting word", error },
       { status: 500 }
     );
   }
