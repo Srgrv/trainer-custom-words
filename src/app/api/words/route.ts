@@ -1,7 +1,5 @@
-// import type { NextApiRequest, NextApiResponse } from "next";
-
 import { NextResponse } from "next/server";
-// import { getSession } from "next-auth/react";
+
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth/next";
 

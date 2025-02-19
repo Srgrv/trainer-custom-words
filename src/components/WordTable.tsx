@@ -19,12 +19,12 @@ import {
 } from "./ui/table";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useWords } from "@/context/WordsContexts";
+import { useGlobal } from "@/context/GlobalContext";
 
 function WordTable() {
   const [filter, setFilter] = useState("all");
 
-  const { words, updateWord, deleteWord } = useWords();
+  const { words, updateWord, deleteWord } = useGlobal();
 
   const filteredWords = words.filter((word) => {
     if (filter === "learned") return word.learned;

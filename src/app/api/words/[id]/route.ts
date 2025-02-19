@@ -19,7 +19,6 @@ export async function PUT(
 
     await dbConnect();
     const id = (await params).id;
-
     const body = await req.json();
 
     const updatedWord = await Word.findOneAndUpdate(

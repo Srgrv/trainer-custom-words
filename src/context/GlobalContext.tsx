@@ -8,9 +8,7 @@ import {
   useEffect,
   useCallback,
 } from "react";
-
 import { useSession } from "next-auth/react";
-import Word from "@/mongodb/models/Word";
 
 type Word = {
   _id?: string;
@@ -19,23 +17,29 @@ type Word = {
   learned: boolean;
 };
 
-type WordsContextType = {
+type GlobalContextType = {
   words: Word[];
-  addWord: (word: Word) => void;
+  addWord: (word: Omit<Word, "_id">) => void;
   updateWord: (word: Word) => Promise<void>;
   deleteWord: (id: string) => Promise<void>;
   resetProgress: () => Promise<void>;
   fetchWords: () => Promise<void>;
+  theme: string;
+  setTheme: (theme: string) => void;
+  isLoadingTheme: boolean;
 };
 
-const WordsContext = createContext<WordsContextType | undefined>(undefined);
+const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
-export const WordsProvider: React.FC<{ children: React.ReactNode }> = ({
+export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [words, setWords] = useState<Word[]>([]);
+  const [theme, setTheme] = useState<string>("light");
   const { data: session } = useSession();
+  const [isLoadingTheme, setIsLoadingTheme] = useState<boolean>(true);
 
+  // Логика для работы со словами
   const fetchWords = useCallback(async () => {
     if (!session) return;
 
@@ -140,8 +144,45 @@ export const WordsProvider: React.FC<{ children: React.ReactNode }> = ({
     setWords(updatedWords);
   };
 
+  /* Логика для работы с темой*/
+
+  useEffect(() => {
+    // читаем тему после монтирования
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme("light");
+    }
+    setIsLoadingTheme(false);
+  }, []);
+
+  const updateTheme = async (newTheme: string) => {
+    localStorage.setItem("theme", newTheme);
+    setTheme(newTheme);
+
+    if (session) {
+      try {
+        const response = await fetch("/api/theme", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ theme: newTheme }),
+        });
+        if (!response.ok) {
+          console.error("Ошибка при обновлении темы на сервере");
+        }
+      } catch (error) {
+        console.error("Ошибка при запросе обновления темы на сервере:", error);
+      }
+    }
+  };
+
+  if (isLoadingTheme) {
+    return <div>Загрузка...</div>; // Пока загружается тема, показываем индикатор
+  }
+
   return (
-    <WordsContext.Provider
+    <GlobalContext.Provider
       value={{
         words,
         addWord,
@@ -149,17 +190,20 @@ export const WordsProvider: React.FC<{ children: React.ReactNode }> = ({
         deleteWord,
         resetProgress,
         fetchWords,
+        theme,
+        setTheme: updateTheme,
+        isLoadingTheme,
       }}
     >
       {children}
-    </WordsContext.Provider>
+    </GlobalContext.Provider>
   );
 };
 
-export const useWords = () => {
-  const context = useContext(WordsContext);
+export const useGlobal = () => {
+  const context = useContext(GlobalContext);
   if (context === undefined) {
-    throw new Error("useWords must be used within a WordsProvider");
+    throw new Error("useGlobal must be used within a GlobalProvider");
   }
   return context;
 };
