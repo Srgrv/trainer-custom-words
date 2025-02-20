@@ -6,7 +6,12 @@ import { Button } from "./ui/button";
 
 function LogoutButton() {
   return (
-    <Button onClick={() => signOut({ callbackUrl: "/login" })}>Выйти</Button>
+    <Button
+      onClick={() => signOut({ callbackUrl: "/login" })}
+      className="md:dark:hover:bg-[#be4d4b]"
+    >
+      Выйти
+    </Button>
   );
 }
 

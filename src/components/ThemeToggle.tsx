@@ -24,9 +24,9 @@ function ThemeToggle() {
   return (
     <span
       onClick={toggleTheme}
-      className="cursor-pointer hover:text-secondary transition-colors"
+      className="cursor-pointer md:dark:hover:text-[#be4d4b] transition-colors"
     >
-      {theme ? "Темная тема" : "Светлая тема"}
+      {theme === "light" ? "Темная тема" : "Светлая тема"}
     </span>
   );
 }

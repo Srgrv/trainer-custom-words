@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Session } from "next-auth";
-
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 //icons
@@ -47,21 +47,27 @@ export function LayoutWithSession({
 }>) {
   const { data: session } = useSession();
 
+  const pathName = usePathname();
+
+  const isActive = (path: string) => {
+    return pathName === path;
+  };
+
   return (
     <GlobalProvider>
-      <div className="bg-background text-foreground min-h-screen flex flex-col">
-        <header className="bg-transparent text-foreground">
-          <nav className="container mx-auto px-4 py-4">
+      <div className="bg-dark-gradient text-foreground min-h-screen flex flex-col">
+        <header className=" border-b-2 border-red-600">
+          <nav className="container mx-auto px-4 py-4 ">
             <ul className="flex flex-wrap justify-between items-center">
-              <li className="text-2xl font-bold hover:text-secondary transition-colors cursor-pointer">
+              <li className="text-2xl font-bold  md:dark:hover:text-[#be4d4b] transition-colors cursor-pointer">
                 <Link href="/">WordMaster</Link>
               </li>
 
               {/* Для мобильных устройств */}
-              <li className="md:hidden">
+              <li className="md:hidden ">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button className="focus:outline-none">
+                    <Button className="focus:outline-none  md:dark:hover:bg-[#be4d4b]">
                       <FaBars className="w-6 h-6" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -69,11 +75,26 @@ export function LayoutWithSession({
                     {/* Если нет сессии на мобильных устройствах */}
                     {!session ? (
                       <>
-                        <DropdownMenuItem>
-                          <Link href="/login">Вход</Link>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/login"
+                            className={`${
+                              isActive("/login") ? "dark:text-red-400" : ""
+                            }`}
+                          >
+                            Вход
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Link href="/register">Регистрация</Link>
+
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/register"
+                            className={`${
+                              isActive("/register") ? "dark:text-red-400" : ""
+                            }`}
+                          >
+                            Регистрация
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <ThemeToggle />
@@ -81,11 +102,25 @@ export function LayoutWithSession({
                       </>
                     ) : (
                       <>
-                        <DropdownMenuItem>
-                          <Link href="/words">Слова</Link>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/words"
+                            className={`${
+                              isActive("/words") ? "dark:text-red-400" : ""
+                            }`}
+                          >
+                            Слова
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Link href="/train">Тренировка</Link>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/train"
+                            className={`${
+                              isActive("/train") ? "dark:text-red-400" : ""
+                            }`}
+                          >
+                            Тренировка
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <ThemeToggle />
@@ -107,13 +142,13 @@ export function LayoutWithSession({
                     <ThemeToggle />
                     <Link
                       href="/login"
-                      className="hover:text-secondary transition-colors"
+                      className="md:dark:hover:text-[#be4d4b] "
                     >
                       Вход
                     </Link>
                     <Link
                       href="/register"
-                      className="hover:text-secondary transition-colors"
+                      className="md:dark:hover:text-[#be4d4b] "
                     >
                       Регистрация
                     </Link>
@@ -122,13 +157,17 @@ export function LayoutWithSession({
                   <>
                     <Link
                       href="/words"
-                      className="hover:text-secondary transition-colors"
+                      className={`md:dark:hover:text-[#be4d4b] ${
+                        isActive("/words") ? "dark:text-red-400" : ""
+                      }`}
                     >
                       Слова
                     </Link>
                     <Link
                       href="/train"
-                      className="hover:text-secondary transition-colors"
+                      className={`md:dark:hover:text-[#be4d4b] ${
+                        isActive("/train") ? "dark:text-red-400" : ""
+                      }`}
                     >
                       Тренировка
                     </Link>
