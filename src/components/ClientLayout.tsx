@@ -77,6 +77,16 @@ export function LayoutWithSession({
                       <>
                         <DropdownMenuItem asChild>
                           <Link
+                            href="/"
+                            className={`${
+                              isActive("/") ? "dark:text-red-400" : ""
+                            }`}
+                          >
+                            Главная
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                          <Link
                             href="/login"
                             className={`${
                               isActive("/login") ? "dark:text-red-400" : ""
@@ -102,6 +112,16 @@ export function LayoutWithSession({
                       </>
                     ) : (
                       <>
+                        <DropdownMenuItem asChild>
+                          <Link
+                            href="/"
+                            className={`${
+                              isActive("/") ? "dark:text-red-400" : ""
+                            }`}
+                          >
+                            Главная
+                          </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                           <Link
                             href="/words"
@@ -182,7 +202,7 @@ export function LayoutWithSession({
         <main className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
           {children}
         </main>
-        <footer className="bg-primary text-primary-foreground text-center py-4">
+        <footer className="bg-black text-white text-center py-4">
           <p>&copy; 2025 WordMaster. Сергей Георгиев</p>
         </footer>
       </div>
