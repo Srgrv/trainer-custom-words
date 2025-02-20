@@ -59,9 +59,11 @@ module.exports = {
       backgroundImage: {
         "dark-gradient":
           "linear-gradient(0deg, var(--color-dark-1), var(--color-dark-2) 94%)",
+        "dark-gradient-card":
+          "linear-gradient(135deg, rgb(187, 175, 177), rgb(76, 74, 85))",
       },
       boxShadow: {
-        custom: "0px 13px 22px 10px rgba(0, 0, 0, 0.54)",
+        custom: "6px 6px 18px 8px rgba(0, 0, 0, 0.2);",
       },
     },
   },

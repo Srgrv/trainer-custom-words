@@ -24,7 +24,7 @@ function ThemeToggle() {
   return (
     <span
       onClick={toggleTheme}
-      className="cursor-pointer md:dark:hover:text-[#be4d4b] transition-colors"
+      className="cursor-pointer md:hover:text-[#be4d4b] transition-colors"
     >
       {theme === "light" ? "Темная тема" : "Светлая тема"}
     </span>

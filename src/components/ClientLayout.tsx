@@ -55,7 +55,7 @@ export function LayoutWithSession({
 
   return (
     <GlobalProvider>
-      <div className="bg-dark-gradient text-foreground min-h-screen flex flex-col">
+      <div className="bg-dark-gradient text-foreground min-h-screen h-screen flex flex-col">
         <header className=" border-b-2 border-red-600">
           <nav className="container mx-auto px-4 py-4 ">
             <ul className="flex flex-wrap justify-between items-center">
@@ -67,7 +67,7 @@ export function LayoutWithSession({
               <li className="md:hidden ">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button className="focus:outline-none  md:dark:hover:bg-[#be4d4b]">
+                    <Button className="focus:outline-none  ">
                       <FaBars className="w-6 h-6" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -78,8 +78,8 @@ export function LayoutWithSession({
                         <DropdownMenuItem asChild>
                           <Link
                             href="/"
-                            className={`${
-                              isActive("/") ? "dark:text-red-400" : ""
+                            className={`cursor-pointer ${
+                              isActive("/") ? "text-red-400" : ""
                             }`}
                           >
                             Главная
@@ -88,8 +88,8 @@ export function LayoutWithSession({
                         <DropdownMenuItem asChild>
                           <Link
                             href="/login"
-                            className={`${
-                              isActive("/login") ? "dark:text-red-400" : ""
+                            className={`cursor-pointer ${
+                              isActive("/login") ? "text-red-400" : ""
                             }`}
                           >
                             Вход
@@ -99,8 +99,8 @@ export function LayoutWithSession({
                         <DropdownMenuItem asChild>
                           <Link
                             href="/register"
-                            className={`${
-                              isActive("/register") ? "dark:text-red-400" : ""
+                            className={`cursor-pointer ${
+                              isActive("/register") ? "text-red-400" : ""
                             }`}
                           >
                             Регистрация
@@ -115,8 +115,8 @@ export function LayoutWithSession({
                         <DropdownMenuItem asChild>
                           <Link
                             href="/"
-                            className={`${
-                              isActive("/") ? "dark:text-red-400" : ""
+                            className={`cursor-pointer ${
+                              isActive("/") ? "text-red-400" : ""
                             }`}
                           >
                             Главная
@@ -125,8 +125,8 @@ export function LayoutWithSession({
                         <DropdownMenuItem asChild>
                           <Link
                             href="/words"
-                            className={`${
-                              isActive("/words") ? "dark:text-red-400" : ""
+                            className={`cursor-pointer ${
+                              isActive("/words") ? "text-red-400" : ""
                             }`}
                           >
                             Слова
@@ -135,8 +135,8 @@ export function LayoutWithSession({
                         <DropdownMenuItem asChild>
                           <Link
                             href="/train"
-                            className={`${
-                              isActive("/train") ? "dark:text-red-400" : ""
+                            className={`cursor-pointer ${
+                              isActive("/train") ? "text-red-400" : ""
                             }`}
                           >
                             Тренировка
@@ -162,13 +162,17 @@ export function LayoutWithSession({
                     <ThemeToggle />
                     <Link
                       href="/login"
-                      className="md:dark:hover:text-[#be4d4b] "
+                      className={`md:dark:hover:text-[#be4d4b] ${
+                        isActive("/login") ? "text-red-400" : ""
+                      }`}
                     >
                       Вход
                     </Link>
                     <Link
                       href="/register"
-                      className="md:dark:hover:text-[#be4d4b] "
+                      className={`md:dark:hover:text-[#be4d4b] ${
+                        isActive("/register") ? "text-red-400" : ""
+                      }`}
                     >
                       Регистрация
                     </Link>
@@ -178,7 +182,7 @@ export function LayoutWithSession({
                     <Link
                       href="/words"
                       className={`md:dark:hover:text-[#be4d4b] ${
-                        isActive("/words") ? "dark:text-red-400" : ""
+                        isActive("/words") ? "text-red-400" : ""
                       }`}
                     >
                       Слова
@@ -186,7 +190,7 @@ export function LayoutWithSession({
                     <Link
                       href="/train"
                       className={`md:dark:hover:text-[#be4d4b] ${
-                        isActive("/train") ? "dark:text-red-400" : ""
+                        isActive("/train") ? "text-red-400" : ""
                       }`}
                     >
                       Тренировка

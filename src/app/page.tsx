@@ -14,7 +14,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        <Card>
+        <Card className="shadow-custom dark:bg-dark-gradient-card">
           <CardContent className="p-6">
             <h3 className="text-2xl font-semibold mb-4">Добавляйте слова</h3>
             <p className="text-secondary-foreground">
@@ -22,7 +22,7 @@ export default function Home() {
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="shadow-custom dark:bg-dark-gradient-card">
           <CardContent className="p-6">
             <h3 className="text-2xl font-semibold mb-4 ">Тренируйтесь</h3>
             <p className="text-secondary-foreground">
@@ -30,7 +30,7 @@ export default function Home() {
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="shadow-custom dark:bg-dark-gradient-card">
           <CardContent className="p-6">
             <h3 className="text-2xl font-semibold mb-4 ">
               Отслеживайте прогресс
