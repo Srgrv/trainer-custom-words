@@ -51,7 +51,7 @@ export default function LoginForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="mt-1 dark:border-[#714444] dark:focus:border-none dark:bg-inherit"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none "
         />
       </div>
       <div>

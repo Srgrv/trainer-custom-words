@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// import { useAuth } from "./AuthContext";
 
 import { useToast } from "@/hooks/use-toast";
 
@@ -19,8 +18,6 @@ export default function RegisterForm() {
   const router = useRouter();
 
   const { toast } = useToast();
-
-  // const { register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +46,10 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 shadow-custom p-6 rounded-xl bg-card dark:border dark:border-[#714444]"
+    >
       <div>
         <Label htmlFor="name">Имя</Label>
         <Input
@@ -57,7 +57,7 @@ export default function RegisterForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none"
         />
       </div>
       <div>
@@ -68,7 +68,7 @@ export default function RegisterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none"
         />
       </div>
       <div>
@@ -79,10 +79,13 @@ export default function RegisterForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none"
         />
       </div>
-      <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">
+      <Button
+        type="submit"
+        className="w-full dark:hover:text-black  dark:hover:bg-[#be4d4b]"
+      >
         Зарегистрироваться
       </Button>
     </form>

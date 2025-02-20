@@ -1,7 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -43,22 +40,6 @@ export default function Home() {
             </p>
           </CardContent>
         </Card>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Link href="/register">
-          <Button size="lg" className="w-full">
-            Начать обучение
-          </Button>
-        </Link>
-        <Link href="/login">
-          <Button
-            size="lg"
-            variant="outline"
-            className="w-full text-secondary-foreground"
-          >
-            Войти
-          </Button>
-        </Link>
       </div>
     </div>
   );
