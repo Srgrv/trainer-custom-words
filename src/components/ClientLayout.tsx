@@ -55,7 +55,7 @@ export function LayoutWithSession({
 
   return (
     <GlobalProvider>
-      <div className="bg-dark-gradient text-foreground min-h-screen h-screen flex flex-col">
+      <div className="bg-dark-gradient text-foreground min-h-screen  flex flex-col">
         <header className=" border-b-2 border-red-600">
           <nav className="container mx-auto px-4 py-4 ">
             <ul className="flex flex-wrap justify-between items-center">
