@@ -9,13 +9,6 @@ import { Button } from "./ui/button";
 import { useGlobal } from "@/context/GlobalContext";
 import { useToast } from "@/hooks/use-toast";
 
-// type Word = {
-//   id: number;
-//   english: string;
-//   russian: string;
-//   learned: boolean;
-// };
-
 function WordTrainer() {
   const [isEnglishToRussian, setIsEnglishToRussian] = useState(true);
   const [currentWord, setCurrentWord] = useState<(typeof words)[0] | null>(
@@ -90,7 +83,7 @@ function WordTrainer() {
     );
 
   return (
-    <Card>
+    <Card className="shadow-custom dark:border-[#714444]">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-primary">
           Тренировка слов
@@ -103,13 +96,13 @@ function WordTrainer() {
             checked={isEnglishToRussian}
             onCheckedChange={setIsEnglishToRussian}
           />
-          <Label htmlFor="language-switch" className="text-muted-foreground">
+          <Label htmlFor="language-switch">
             {isEnglishToRussian
               ? "Английский -> Русский"
               : "Русский -> Английский"}
           </Label>
         </div>
-        <div className="text-3xl font-bold text-center p-6 bg-secondary text-primary-foreground rounded-lg">
+        <div className="text-3xl font-bold text-center p-6  rounded-lg">
           {currentWord &&
             (isEnglishToRussian ? currentWord.english : currentWord.russian)}
         </div>
@@ -118,16 +111,19 @@ function WordTrainer() {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="Введите перевод"
-            className="text-lg"
+            className="text-lg  dark:border-[#714444] dark:focus:border-none"
           />
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="w-full   md:dark:hover:text-black  md:dark:hover:bg-[#be4d4b]"
+          >
             Проверить
           </Button>
         </form>
         <Button
           onClick={resetProgress}
           variant="default"
-          className="w-full text-white bg-background"
+          className="w-full text-white bg-background md:dark:hover:text-black  md:dark:hover:bg-[#be4d4b]"
         >
           Сбросить прогресс
         </Button>

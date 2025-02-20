@@ -20,6 +20,7 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useGlobal } from "@/context/GlobalContext";
+import { Trash2, CheckCircle, Circle, Trash } from "lucide-react";
 
 function WordTable() {
   const [filter, setFilter] = useState("all");
@@ -53,7 +54,7 @@ function WordTable() {
   return (
     <div className="space-y-4">
       <Select onValueChange={setFilter} defaultValue={filter}>
-        <SelectTrigger>
+        <SelectTrigger className=" dark:border-[#714444]">
           <SelectValue placeholder="Фильтр" />
         </SelectTrigger>
         <SelectContent>
@@ -62,20 +63,23 @@ function WordTable() {
           <SelectItem value="learned">Выученные</SelectItem>
         </SelectContent>
       </Select>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+      <div className="rounded-md border dark:border-[#714444]">
+        <Table className="">
+          <TableHeader className="border-b-2 dark:border-[#714444]">
             <TableRow>
               <TableHead className="w-[200px]">Английский</TableHead>
               <TableHead className="w-[200px]">Русский</TableHead>
-              <TableHead>Статус</TableHead>
-              <TableHead className="text-right">Действия</TableHead>
+              <TableHead className="hidden md:table-cell">Статус</TableHead>
+              <TableHead className="hidden md:table-cell text-right">
+                Действия
+              </TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
             {filteredWords.map((word) => (
-              <TableRow key={word._id}>
-                <TableCell>
+              <TableRow key={word._id} className="dark:border-[#714444]">
+                <TableCell className="w-1/2">
                   <Input
                     value={word.english}
                     onChange={(e) =>
@@ -83,7 +87,7 @@ function WordTable() {
                     }
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="w-1/2">
                   <Input
                     value={word.russian}
                     onChange={(e) =>
@@ -91,21 +95,55 @@ function WordTable() {
                     }
                   />
                 </TableCell>
-                <TableCell>
+
+                {/* Статус только для больших экранов */}
+
+                <TableCell className="hidden md:table-cell">
                   <Button
                     variant={word.learned ? "default" : "outline"}
                     onClick={() => handleToggleLearned(word._id!)}
+                    className="flex items-center justify-center gap-2"
                   >
+                    {word.learned ? (
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                    ) : (
+                      <div className="w-4 h-4 border-2  rounded-full"></div>
+                    )}
                     {word.learned ? "Выучено" : "Изучается"}
                   </Button>
                 </TableCell>
-                <TableCell className="text-right">
-                  <Button
-                    variant="destructive"
+
+                {/* Действия только для больших экранов */}
+                <TableCell className="hidden md:table-cell text-right">
+                  <button
                     onClick={() => deleteWord(word._id!)}
+                    className="flex items-center justify-center gap-2"
                   >
+                    <Trash2 className="w-4 h-4 text-red-500" />
                     Удалить
-                  </Button>
+                  </button>
+                </TableCell>
+
+                {/* Иконки для маленьких экранов */}
+                <TableCell className="md:hidden flex gap-2 justify-end ">
+                  {/* Иконка для статуса */}
+                  <button
+                    onClick={() => handleToggleLearned(word._id!)}
+                    className="flex items-center justify-center "
+                  >
+                    {word.learned ? (
+                      <CheckCircle className="w-7 h-10 text-green-500" />
+                    ) : (
+                      <Circle className="w-7 h-10 text-gray-400" />
+                    )}
+                  </button>
+                  {/* Кнопка удаления с крестиком */}
+                  <button
+                    onClick={() => deleteWord(word._id!)}
+                    className="flex items-center justify-center"
+                  >
+                    <Trash className="w-8 h-10 text-red-500" />
+                  </button>
                 </TableCell>
               </TableRow>
             ))}

@@ -18,10 +18,10 @@ export default function WordsPage() {
   }, [session, words.length, fetchWords]);
 
   return (
-    <div className="space-y-8">
-      <Card className="bg-red-400 shadow-lg">
+    <div className="space-y-8 ">
+      <Card className="shadow-custom dark:border-[#714444] ">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-blue-600 ">
+          <CardTitle className="text-2xl font-bold ">
             Добавить новое слово
           </CardTitle>
         </CardHeader>
@@ -29,11 +29,9 @@ export default function WordsPage() {
           <WordInput />
         </CardContent>
       </Card>
-      <Card>
+      <Card className="shadow-custom dark:border-[#714444] ">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-blue-600">
-            Список слов
-          </CardTitle>
+          <CardTitle className="text-2xl font-bold">Список слов</CardTitle>
         </CardHeader>
         <CardContent>
           <WordTable />

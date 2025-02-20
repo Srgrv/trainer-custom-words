@@ -39,7 +39,7 @@ function WordInput() {
           id="english"
           value={english}
           placeholder="Введите английское слово"
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none "
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEnglish(e.target.value)
           }
@@ -52,10 +52,13 @@ function WordInput() {
           value={russian}
           onChange={(e) => setRussian(e.target.value)}
           placeholder="Введите русский перевод"
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none"
         />
       </div>
-      <Button type="submit" className="w-full">
+      <Button
+        type="submit"
+        className="w-full  md:dark:hover:text-black  md:dark:hover:bg-[#be4d4b]"
+      >
         Добавить слово
       </Button>
     </form>

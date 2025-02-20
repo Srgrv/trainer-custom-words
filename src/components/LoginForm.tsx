@@ -39,7 +39,10 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 shadow-custom p-6 rounded-xl bg-card dark:border dark:border-[#714444] "
+    >
       <div>
         <Label htmlFor="email">Email</Label>
         <Input
@@ -48,7 +51,7 @@ export default function LoginForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none dark:bg-inherit"
         />
       </div>
       <div>
@@ -59,10 +62,13 @@ export default function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="mt-1"
+          className="mt-1 dark:border-[#714444] dark:focus:border-none"
         />
       </div>
-      <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">
+      <Button
+        type="submit"
+        className="w-full dark:hover:text-black  dark:hover:bg-[#be4d4b]"
+      >
         Войти
       </Button>
     </form>

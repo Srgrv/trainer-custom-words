@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-  darkMode: ["media"],
+  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -55,6 +55,13 @@ module.exports = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      backgroundImage: {
+        "dark-gradient":
+          "linear-gradient(0deg, var(--color-dark-1), var(--color-dark-2) 94%)",
+      },
+      boxShadow: {
+        custom: "0px 13px 22px 10px rgba(0, 0, 0, 0.54)",
       },
     },
   },

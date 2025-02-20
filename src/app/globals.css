@@ -31,7 +31,10 @@
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    --color-dark-1: hsl(1, 53%, 52%);
+    --color-dark-2: hsl(0, 15%, 10%);
+    --color-dark-3: hsl(350, 7.4%, 71%);
+    --background: 0 40% 44%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -57,3 +60,30 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+.dark-gradient {
+  background: linear-gradient(
+    0deg,
+    var(--color-dark-1),
+    var(--color-dark-2) 94%
+  );
+}
+
+/* @layer components {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: inherit !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input:-moz-autofill,
+  input:-moz-autofill:hover,
+  input:-moz-autofill:focus,
+  input:-moz-autofill:active {
+    background-color: transparent !important;
+    color: inherit !important;
+  } */
+/* } */
