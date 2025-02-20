@@ -155,11 +155,19 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
       setTheme("light");
     }
     setIsLoadingTheme(false);
+    // Инициализация темы
+    // if (!localStorage.getItem("theme")) {
+    //   localStorage.setItem("theme", "light");
+    // }
+    // setIsLoadingTheme(false);
   }, []);
 
   const updateTheme = async (newTheme: string) => {
+    // const currentTheme = localStorage.getItem("theme");
     localStorage.setItem("theme", newTheme);
+    // if (currentTheme === newTheme) return;
     setTheme(newTheme);
+    // localStorage.setItem("theme", newTheme);
 
     if (session) {
       try {
@@ -178,7 +186,13 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   if (isLoadingTheme) {
-    return <div>Загрузка...</div>; // Пока загружается тема, показываем индикатор
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900 dark:border-gray-100">
+          Загрузка...
+        </div>
+      </div>
+    );
   }
 
   return (

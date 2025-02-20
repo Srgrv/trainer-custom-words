@@ -8,7 +8,7 @@ function LogoutButton() {
   return (
     <Button
       onClick={() => signOut({ callbackUrl: "/login" })}
-      className="md:dark:hover:bg-[#be4d4b]"
+      className="md:hover:bg-[#be4d4b]"
     >
       Выйти
     </Button>
