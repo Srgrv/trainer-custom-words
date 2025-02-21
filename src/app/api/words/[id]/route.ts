@@ -32,9 +32,8 @@ export async function PUT(
     }
     return NextResponse.json(updatedWord);
   } catch (error) {
-    console.error("Ошибка при удалении слова: ", error);
     return NextResponse.json(
-      { message: "Error updating word" },
+      { message: "Error updating word", error },
       { status: 500 }
     );
   }
@@ -44,27 +43,20 @@ export async function DELETE(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  console.log("delete работает");
   try {
     const session = await getServerSession(authOptions);
-    console.log("после сессии");
+
     if (!session) {
-      console.log("Пользователь не авторизован");
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    console.log("после проверки");
-
     await dbConnect();
     const id = (await params).id;
-    console.log("Удаляем слово с id:", id);
 
     const deletedWord = await Word.findOneAndDelete({
       _id: new ObjectId(id),
       userId: session.user.id,
     }).exec();
-
-    console.log("Удаленное слово:", deletedWord);
 
     if (!deletedWord) {
       return NextResponse.json({ message: "Word not found" }, { status: 404 });

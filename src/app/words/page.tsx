@@ -5,11 +5,12 @@ import WordInput from "@/components/WordInput";
 import WordTable from "@/components/WordTable";
 import React, { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useGlobal } from "@/context/GlobalContext";
+
+import { useWordsStore } from "@/store";
 
 export default function WordsPage() {
   const { data: session } = useSession();
-  const { words, fetchWords } = useGlobal();
+  const { words, fetchWords } = useWordsStore();
 
   useEffect(() => {
     if (session && words.length === 0) {

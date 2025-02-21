@@ -15,27 +15,22 @@ export async function GET() {
     await dbConnect();
 
     let theme = await Theme.findOne({ userId: session.user.id });
-    console.log("Найдена тема в базе данных:", theme);
 
     if (!theme) {
-      console.log("Тема не найдена, возвращаем дефолтную тему.");
-
       theme = new Theme({
         userId: session.user.id,
         theme: "light",
       });
 
       await theme.save();
-      console.log("Дефолтная тема сохранена:", theme);
 
       return NextResponse.json({ theme: "light" });
     }
 
     return NextResponse.json({ theme: theme.theme });
   } catch (error) {
-    console.error("Ошибка при получении темы: ", error);
     return NextResponse.json(
-      { message: "Error fetching theme" },
+      { message: "Error fetching theme", error },
       { status: 500 }
     );
   }
@@ -52,7 +47,6 @@ export async function PUT(req: Request) {
     await dbConnect();
 
     const body = await req.json();
-    console.log("Полученные данные для обновления темы:", body);
 
     const { theme } = body;
 
@@ -62,13 +56,10 @@ export async function PUT(req: Request) {
       { new: true }
     );
 
-    console.log("Обновленная тема:", updatedTheme);
-
     return NextResponse.json(updatedTheme);
   } catch (error) {
-    console.error("Ошибка при изменении темы: ", error);
     return NextResponse.json(
-      { message: "Error changing theme" },
+      { message: "Error changing theme", error },
       { status: 500 }
     );
   }

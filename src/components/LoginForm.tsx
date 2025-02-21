@@ -33,7 +33,6 @@ export default function LoginForm() {
         variant: "destructive",
       });
     } else {
-      // await fetchWords();
       router.push("/words");
     }
   };
