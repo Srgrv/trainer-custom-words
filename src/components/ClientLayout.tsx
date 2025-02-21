@@ -162,7 +162,7 @@ export function LayoutWithSession({
                     <ThemeToggle />
                     <Link
                       href="/login"
-                      className={`md:dark:hover:text-[#be4d4b] ${
+                      className={`md:hover:text-[#be4d4b] ${
                         isActive("/login") ? "text-red-400" : ""
                       }`}
                     >
@@ -170,7 +170,7 @@ export function LayoutWithSession({
                     </Link>
                     <Link
                       href="/register"
-                      className={`md:dark:hover:text-[#be4d4b] ${
+                      className={`md:hover:text-[#be4d4b] ${
                         isActive("/register") ? "text-red-400" : ""
                       }`}
                     >
@@ -181,7 +181,7 @@ export function LayoutWithSession({
                   <>
                     <Link
                       href="/words"
-                      className={`md:dark:hover:text-[#be4d4b] ${
+                      className={`md:hover:text-[#be4d4b] ${
                         isActive("/words") ? "text-red-400" : ""
                       }`}
                     >
@@ -189,7 +189,7 @@ export function LayoutWithSession({
                     </Link>
                     <Link
                       href="/train"
-                      className={`md:dark:hover:text-[#be4d4b] ${
+                      className={`md:hover:text-[#be4d4b] ${
                         isActive("/train") ? "text-red-400" : ""
                       }`}
                     >
@@ -207,7 +207,7 @@ export function LayoutWithSession({
           {children}
         </main>
         <footer className="bg-black text-white text-center py-4">
-          <p>&copy; 2025 WordMaster. Сергей Георгиев</p>
+          <p>WordMaster. Сергей Георгиев &copy; 2025</p>
         </footer>
       </div>
       <Toaster />
