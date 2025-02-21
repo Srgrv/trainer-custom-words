@@ -5,13 +5,14 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useGlobal } from "@/context/GlobalContext";
+
+import { useWordsStore } from "@/store";
 
 function WordInput() {
   const [english, setEnglish] = useState("");
   const [russian, setRussian] = useState("");
   const { toast } = useToast();
-  const { addWord } = useGlobal();
+  const { addWord } = useWordsStore();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

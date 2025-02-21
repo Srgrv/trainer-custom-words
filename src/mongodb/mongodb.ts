@@ -24,13 +24,10 @@ if (!cached) {
 
 async function dbConnect(): Promise<Mongoose> {
   if (cached.conn) {
-    console.log("Используем кэшированное подключение");
     return cached.conn;
   }
 
   if (!cached.promise) {
-    console.log("Инициализация подключения к MongoDB...");
-
     const opts = {
       bufferCommands: false,
       connectTimeoutMS: 10000, // Таймаут на подключение
@@ -38,17 +35,14 @@ async function dbConnect(): Promise<Mongoose> {
     };
 
     cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
-      console.log("Подключение к MongoDB успешно установлено");
       cached.conn = mongoose;
       return mongoose;
     });
   }
 
   try {
-    console.log("Ожидаем подключения...");
     cached.conn = await cached.promise;
   } catch (e) {
-    console.error("Ошибка при подключении к MongoDB:", e);
     cached.promise = null;
     throw e;
   }

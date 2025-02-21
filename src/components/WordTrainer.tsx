@@ -6,7 +6,8 @@ import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useGlobal } from "@/context/GlobalContext";
+// import { useGlobal } from "@/context/GlobalContext";
+import { useWordsStore } from "@/store";
 import { useToast } from "@/hooks/use-toast";
 
 function WordTrainer() {
@@ -15,7 +16,7 @@ function WordTrainer() {
     null
   );
   const [userInput, setUserInput] = useState("");
-  const { words, updateWord, resetProgress } = useGlobal();
+  const { words, updateWord, resetProgress } = useWordsStore();
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,17 +53,6 @@ function WordTrainer() {
     }
     setUserInput("");
   };
-
-  //   const handleReset = () => {
-  //     const resetWords = words.map((word) => ({ ...word, learned: false }));
-  //     setWords(resetWords);
-  //     localStorage.setItem("words", JSON.stringify(resetWords));
-  //     // toast({
-  //     //   title: "Прогресс сброшен",
-  //     //   description: "Все слова отмечены как неизученные",
-  //     //   duration: 2000,
-  //     // });
-  //   };
 
   useEffect(() => {
     if (words.length > 0) {

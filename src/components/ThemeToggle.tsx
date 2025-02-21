@@ -1,32 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
+type TProps = {
+  toggleTheme: () => void;
+};
 
-//context
-import { useGlobal } from "@/context/GlobalContext";
-
-function ThemeToggle() {
-  const { theme, setTheme } = useGlobal();
-
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-  };
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
+function ThemeToggle({ toggleTheme }: TProps) {
   return (
     <span
       onClick={toggleTheme}
       className="cursor-pointer md:hover:text-[#be4d4b] transition-colors"
     >
-      {theme === "light" ? "Темная тема" : "Светлая тема"}
+      {localStorage.getItem("theme") === "light"
+        ? "Темная тема"
+        : "Светлая тема"}
     </span>
   );
 }
